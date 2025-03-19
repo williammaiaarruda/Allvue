@@ -5,11 +5,17 @@
     /// </summary>
     public enum StockBatchSaleStrategy
     {
-        FIFO = 1, //Implemented
-        LIFO = 2, //To be implemented
-        AverageCost = 3, //To be implemented
-        LowestTaxExposure = 4, //To be implemented
-        HighestTaxExposure = 5, //To be implemented
-        LotBased = 6 //To be implemented
+        /// <summary>
+        /// Implemented
+        /// </summary>
+        FIFO = 1,
+        /// <summary>
+        /// To be implemented
+        /// </summary>
+        LIFO = 2, 
+        AverageCost = 3,
+        LowestTaxExposure = 4, 
+        HighestTaxExposure = 5,
+        LotBased = 6 
     }
 }

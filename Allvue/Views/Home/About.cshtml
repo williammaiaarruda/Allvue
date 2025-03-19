@@ -1,8 +1,179 @@
-﻿
-<h3>TODO Docs</h3>
+﻿@{
+    ViewData["Title"] = "Cost Accounting Documentation";
+}
 
-<div class="d-flex justify-content-end mt-4">
-    <a asp-action="Index" class="btn btn-secondary btn-md shadow rounded-pill back-button">
-        <i class="bi bi-arrow-left"></i> Back to List
-    </a>
+<div class="card shadow-lg p-4 w-75 mx-auto">
+        
+    <h2 class="text-primary fw-bold text-center mb-4">Allvue Investments</h2>
+
+    <h3 class="text-secondary fw-bold mt-4">1. Business Challenge</h3>
+    <p>
+        When tracking investments, it is often desirable to be able to determine your profits when you sell an investment.
+        However, if you have purchased investments at different prices and you only sell some of those investments,
+        which purchases do you use to determine your cost basis?
+    </p>
+
+    <p>
+        For example, if you purchased 100 shares of Microsoft stock at $20 per share in January and you purchased 200
+        additional shares of Microsoft stock at $30 per share in March, what is your profit if you sell 150 shares of
+        Microsoft stock at $40 per share in April?
+    </p>
+
+    <p>
+        This depends on whether you sold 150 shares of the stock based on your $30 cost, or maybe 100 of those shares
+        came from your $20 cost and the remaining 50 shares came from your $30 cost. This issue is known as “cost accounting.”
+    </p>
+
+    <p>
+        Since you own all of the shares together, there is no way to actually sell specific shares from either group of 
+        purchases (otherwise known as “lots”).  However, for accounting and tax purposes you need to sell the shares from your 
+        lots based on some defined strategy.  There are several strategies that are used:
+    </p>
+
+    <h4 class="text-primary mt-4">Cost Accounting Strategies</h4>
+    <ul>
+        <li><strong>FIFO (First In / First Out):</strong> Sells shares from the first lot purchased and moves to subsequent lots.</li>
+        <li><strong>LIFO (Last In / First Out):</strong> Sells shares from the most recent lot first.</li>
+        <li><strong>Average Cost:</strong> Uses the average cost of all shares to determine profits.</li>
+        <li><strong>Lowest Tax Exposure:</strong> Optimizes tax liability.</li>
+        <li><strong>Highest Tax Exposure:</strong> Maximizes tax liability.</li>
+        <li><strong>Lot-Based:</strong> The user manually selects which lot to sell from.</li>
+    </ul>
+
+    <h3 class="text-secondary fw-bold mt-4">2. Solution</h3>
+    <p>To address this challenge, our solution enables stock sales simulation based on existing stock batches.</p>
+
+    <h4 class="text-secondary fw-bold mt-4">2.1. Guide for Allvue Project</h4>
+
+    <h4 class="text-primary mt-4">How to Run the Solution</h4>
+    <p>Open the <strong>Allvue.sln</strong> solution in Visual Studio. The main project, <strong>Allvue</strong>, should be set as the startup project.</p>
+
+    <h4 class="text-primary mt-4">Technologies</h4>
+    <ul>
+        <li><strong>.NET 8.0:</strong> Core framework for web and business logic.</li>
+        <li><strong>ASP.NET MVC:</strong> Web application structure including controllers and views.</li>
+        <li><strong>Dependency Injection:</strong> Manages dependencies for services and repositories.</li>
+        <li><strong>Mock Data:</strong> The system allows running with mock data instead of a real database.</li>
+    </ul>
+
+    <h4 class="text-primary mt-4">Project Structure</h4>
+    <ul>
+        <li><strong>Allvue:</strong> The main web application providing user interface.</li>
+        <li><strong>Allvue.Data:</strong> Responsible for mock data setup.</li>
+        <li><strong>Allvue.Models:</strong> Contains the domain models of the project.</li>
+        <li><strong>Allvue.Services:</strong> Handles business logic and processing.</li>
+    </ul>
+
+    <h4 class="text-secondary fw-bold mt-4">2.2. Features</h4>
+    
+    <h4 class="text-secondary fw-bold mt-4">2.2.1. Stock Batch List Page</h4>
+    <p>Users can see list of stock batches:</p>
+
+    <h4 class="text-primary mt-4">Initial Stock Batches</h4>
+    <ul>
+        <li><strong>Batch 1:</strong> 100 shares at $20 (January)</li>
+        <li><strong>Batch 2:</strong> 150 shares at $30 (February)</li>
+        <li><strong>Batch 3:</strong> 120 shares at $10 (March)</li>
+    </ul>
+
+    <h4 class="text-primary mt-4">Stock Batch List</h4>
+    <p>The homepage displays a list of stock batches with:</p>
+    <ul>
+        <li><strong>Quantity:</strong> Initial shares acquired.</li>
+        <li><strong>Remaining Quantity:</strong> Shares available to sell.</li>
+        <li><strong>Unit Price:</strong> Price per share.</li>
+        <li><strong>Acquisition Date:</strong> Date of purchase.</li>
+    </ul>
+
+    <h4 class="text-primary mt-4">Available Actions</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Reset Data</th>
+            <td>Resets stock batches to original state.</td>
+        </tr>
+        <tr>
+            <th>Calculate Sale</th>
+            <td>Opens the Sale Calculator.</td>
+        </tr>
+    </table>
+
+    <h4 class="text-secondary fw-bold mt-4">2.2.2. Calculate Sale Page</h4>
+    <p>Users enter details for selling shares:</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>Sale Strategy</th>
+            <td>Selects sales strategy.</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>Number of shares to sell.</td>
+        </tr>
+        <tr>
+            <th>Price per Unit</th>
+            <td>Sale price per share.</td>
+        </tr>
+    </table>
+
+    <h4 class="text-primary mt-4">Available Actions</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Back to List:</th>
+            <td>Navigates back to the Stock Batch List.</td>
+        </tr>
+        <tr>
+            <th>Calculate</th>
+            <td>Performs all validations and logic necessary to execute the sale.</td>
+        </tr>
+    </table>
+
+    <h4 class="text-primary mt-4">Validation Rules</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Required Fields</th>
+            <td>All fields must be filled.</td>
+        </tr>
+        <tr>
+            <th>Implemented Strategy</th>
+            <td>Only FIFO is currently implemented.</td>
+        </tr>
+        <tr>
+            <th>Invalid Quantity</th>
+            <td>Cannot sell more shares than available.</td>
+        </tr>
+    </table>
+
+    <h4 class="text-secondary fw-bold mt-4">2.2.3. Sales Calculation Result</h4>
+    <p>If the sale is valid, results will display:</p>
+    <ul>
+        <li><strong>Remaining shares:</strong> After sale.</li>
+        <li><strong>Cost basis per sold share:</strong> Cost of sold shares.</li>
+        <li><strong>Cost basis per remaining share:</strong> Cost of remaining shares.</li>
+        <li><strong>Sale Result:</strong> Profit or loss.</li>
+    </ul>
+
+    <h4 class="text-primary mt-4">Behavior</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Sale Result</th>
+            <td>Displays in blue for profit and red for loss.</td>
+        </tr>
+    </table>
+
+    <h4 class="text-primary mt-4">Available Actions</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Back to List:</th>
+            <td>Navigates back to the Stock Batch List.</td>
+        </tr>
+        <tr>
+            <th>Calculate</th>
+            <td>Performs all validations and logic necessary to execute the sale.</td>
+        </tr>
+    </table>
+
+    <div class="d-flex justify-content-end mt-4">
+        <a asp-action="Index" class="btn btn-secondary btn-md shadow rounded-pill back-button">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
 </div>
