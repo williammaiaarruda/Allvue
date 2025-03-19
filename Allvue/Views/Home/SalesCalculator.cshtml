@@ -1,0 +1,97 @@
+﻿@using Allvue.Services.Enums
+@model CalculateSaleViewModel
+
+@{
+    ViewData["Title"] = "Sales Calculator";
+}
+
+<div class="card shadow-lg p-4 w-50 mx-auto">
+    <h2 class="text-primary fw-bold text-center mb-4">Stock Sale Calculation</h2>
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+    <form asp-action="SalesCalculator" method="post" id="saleForm">
+        <div class="form-group mb-3">
+            <label asp-for="Strategy" class="form-label fw-bold"></label>
+            <select asp-for="Strategy" asp-items="Html.GetEnumSelectList<StockBatchSaleStrategy>()" class="form-select">
+                <option value="">Select Strategy</option>
+            </select>
+            <span class="text-danger d-block mt-1" asp-validation-for="Strategy"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Quantity" class="form-label fw-bold"></label>
+            <input asp-for="Quantity" class="form-control" type="number" min="1" required />
+            <span asp-validation-for="Quantity" class="text-danger d-block mt-1"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Price" class="form-label fw-bold"></label>
+            <input asp-for="Price" class="form-control" type="number" step="0.01" min="0.01" required />
+            <span asp-validation-for="Price" class="text-danger d-block mt-1"></span>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            <a asp-action="Index" class="btn btn-secondary btn-md shadow rounded-pill back-button me-3">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-primary btn-md shadow rounded-pill">
+                <i class="bi bi-calculator"></i> Calculate
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<style type="text/css">
+    .card {
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        background: #fff;
+    }
+
+    .shadow-lg {
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .form-label {
+        font-size: 1.1rem;
+    }
+
+    .form-control, .form-select {
+        font-size: 1.1rem;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .back-button, .btn {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .back-button:hover {
+        background-color: #5a6268;
+        transform: translateX(-3px);
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+</style>
+

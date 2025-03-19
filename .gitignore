@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Allvue/bin/Debug/net8.0
+/Allvue/obj
+/Allvue.Data/bin/Debug/net8.0
+/Allvue.Data/obj
+/Allvue.Models/bin/Debug/net8.0
+/Allvue.Models/obj
+/Allvue.Services/bin/Debug/net8.0
+/Allvue.Services/obj
