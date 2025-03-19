@@ -3,15 +3,18 @@ using Allvue.Services.Enums;
 
 namespace Allvue.Services.Interfaces
 {
+    /// <summary>
+    /// Defines the Stock Batch Service interface .
+    /// </summary>
     public interface IStockBatchService
     {
-        void ResetData();
-        int GetTotalAvailableStocks();
         void AddStockBatch(StockBatch stockBatch);
-        void UpdateStockBatch(StockBatch stockBatch);
-        void DeleteStockBatch(int id);
-        StockBatch? GetStockBatchById(int id);
-        IEnumerable<StockBatch> GetAllStockBatches();
         StockBatchSale CalculateSale(StockBatchSaleStrategy strategy, int quantity, decimal price);
+        void DeleteStockBatch(int id);
+        IEnumerable<StockBatch> GetAllStockBatches();
+        StockBatch? GetStockBatchById(int id);
+        int GetTotalAvailableStocks();
+        void ResetData();
+        void UpdateStockBatch(StockBatch stockBatch);
     }
 }

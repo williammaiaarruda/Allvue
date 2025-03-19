@@ -5,6 +5,9 @@ using Allvue.Services.Interfaces;
 
 namespace Allvue.Services
 {
+    /// <summary>
+    /// Provides stock batch mapped services.
+    /// </summary>
     public class StockBatchService : IStockBatchService
     {
         private readonly IStockBatchDao _stockBatchDao;
@@ -15,60 +18,36 @@ namespace Allvue.Services
         }
 
         /// <summary>
-        /// Resets the stock batch list to its default state.
-        /// This method is only for mock/testing purposes to facilitate development.
+        /// Adds a stock batch to the stocks list.
         /// </summary>
-        public void ResetData()
-        {
-            _stockBatchDao.ResetData();
-        }
-
-        public int GetTotalAvailableStocks()
-        {
-            return _stockBatchDao.GetAll()
-                .Sum(batch => batch.RemainingQuantity);
-        }
-
         public void AddStockBatch(StockBatch stockBatch)
         {
             _stockBatchDao.Add(stockBatch);
         }
 
-        public void UpdateStockBatch(StockBatch stockBatch)
-        {
-            _stockBatchDao.Update(stockBatch);
-        }
-
-        public void DeleteStockBatch(int id)
-        {
-            _stockBatchDao.Delete(id);
-        }
-
-        public StockBatch? GetStockBatchById(int id)
-        {
-            return _stockBatchDao.GetById(id);
-        }
-
-        public IEnumerable<StockBatch> GetAllStockBatches()
-        {
-            return _stockBatchDao.GetAll();
-        }
-
+        /// <summary>
+        /// Calculates a stock batch sale according to chosen strategy.
+        /// </summary>
         public StockBatchSale CalculateSale(StockBatchSaleStrategy strategy, int quantity, decimal price)
         {
             switch (strategy)
             {
                 case StockBatchSaleStrategy.FIFO:
                     return CalculateSaleFIFO(quantity, price);
-                    break;
+                case StockBatchSaleStrategy.AverageCost:
                 case StockBatchSaleStrategy.LIFO:
-                    throw new NotImplementedException("LIFO strategy not implemented");
+                case StockBatchSaleStrategy.HighestTaxExposure:
+                case StockBatchSaleStrategy.LotBased:
+                case StockBatchSaleStrategy.LowestTaxExposure:
+                    throw new NotImplementedException($"Sale strategy not implemented: {strategy}");
                 default:
                     return CalculateSaleFIFO(quantity, price);
-                    break;
             }
         }
-
+        
+        /// <summary>
+        /// Calculates a stock batch sale following FIFO strategy definition.
+        /// </summary>
         public StockBatchSale CalculateSaleFIFO(int quantity, decimal price)
         {
             var stockBatches = _stockBatchDao.GetAll()
@@ -123,5 +102,58 @@ namespace Allvue.Services
                 SaleProfitResult = totalProfit
             };
         }
+
+        // <summary>
+        /// Deletes a stock batch from the stocks list.
+        /// </summary>
+        public void DeleteStockBatch(int id)
+        {
+            _stockBatchDao.Delete(id);
+        }
+
+        /// <summary>
+        /// Gets all stock batches from the stocks list.
+        /// </summary>
+        public IEnumerable<StockBatch> GetAllStockBatches()
+        {
+            return _stockBatchDao.GetAll();
+        }
+
+        /// <summary>
+        /// Gets a stock batch from the stocks list using its Id.
+        /// </summary>
+        public StockBatch? GetStockBatchById(int id)
+        {
+            return _stockBatchDao.GetById(id);
+        }
+
+        /// <summary>
+        /// Gets the total stocks according to the available stock batches remaining quantities.
+        /// </summary>
+        public int GetTotalAvailableStocks()
+        {
+            return _stockBatchDao.GetAll()
+                .Sum(batch => batch.RemainingQuantity);
+        }
+
+        /// <summary>
+        /// Resets the stock batch list to its default state.
+        /// This method is only for mock/testing purposes to facilitate development.
+        /// </summary>
+        public void ResetData()
+        {
+            _stockBatchDao.ResetData();
+        }
+
+        /// <summary>
+        /// Updates a stock batch in the stocks list.
+        /// </summary>
+        public void UpdateStockBatch(StockBatch stockBatch)
+        {
+            _stockBatchDao.Update(stockBatch);
+        }
+
+
+
     }
 }

@@ -31,6 +31,19 @@ namespace Allvue.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Resets the stock batch list to its default state.
+        /// This method is only for mock/testing purposes to facilitate development.
+        /// </summary>
+        public IActionResult ResetMockData()
+        {
+            _stockBatchService.ResetData();
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Calculates a stock batch sale.
+        /// </summary>
         [HttpPost]
         public ActionResult SalesCalculator(CalculateSaleViewModel model)
         {
@@ -47,14 +60,18 @@ namespace Allvue.Controllers
                 return View(model);
             }
 
-            var calculatedResult = _stockBatchService.CalculateSale(model.Strategy.Value, model.Quantity, model.Price);
-            return View("CalculatedSale", calculatedResult);
+            try
+            {
+                var calculatedResult = _stockBatchService.CalculateSale(model.Strategy.Value, model.Quantity, model.Price);
+                return View("CalculatedSale", calculatedResult);
+            }
+            catch (NotImplementedException ex)
+            {
+                ModelState.AddModelError("", $"Error Message: {ex.Message}");
+                return View(model);
+            }
+
         }
 
-        public IActionResult ResetMockData()
-        {
-            _stockBatchService.ResetData(); 
-            return RedirectToAction("Index");
-        }
     }
 }

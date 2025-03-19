@@ -2,6 +2,9 @@
 
 namespace Allvue.Models
 {
+    /// <summary>
+    /// Defines the Stock Batch Sale model containing all relevant information related to the shares sale.
+    /// </summary>
     public class StockBatchSale
     {
         /// <summary>
@@ -9,12 +12,6 @@ namespace Allvue.Models
         /// </summary>
         [Display(Name = "Remaining shares after sale")]
         public int RemainingStocksAfterSale { get; set; }
-
-        /// <summary>
-        /// The cost basis per share of the sold shares
-        /// </summary>
-        [Display(Name = "Cost basis per sold share")]
-        public decimal SoldStocksCostBasis { get; set; }
 
         /// <summary>
         /// The cost basis per share of the remaining shares after the sale
@@ -27,5 +24,11 @@ namespace Allvue.Models
         /// </summary>
         [Display(Name = "Sale Result")]
         public decimal SaleProfitResult { get; set; }
+
+        /// <summary>
+        /// The cost basis per share of the sold shares
+        /// </summary>
+        [Display(Name = "Cost basis per sold share")]
+        public decimal SoldStocksCostBasis { get; set; }
     }
 }
